@@ -1,0 +1,16 @@
+com\gdsofi\crud_cvp\service\VentaService.class
+com\gdsofi\crud_cvp\service\IProductoService.class
+com\gdsofi\crud_cvp\model\Venta.class
+com\gdsofi\crud_cvp\service\IVentaService.class
+com\gdsofi\crud_cvp\CrudCvpApplication.class
+com\gdsofi\crud_cvp\model\Producto.class
+com\gdsofi\crud_cvp\service\ClienteService.class
+com\gdsofi\crud_cvp\controller\ProductoController.class
+com\gdsofi\crud_cvp\repository\IProductoRepository.class
+com\gdsofi\crud_cvp\model\Cliente.class
+com\gdsofi\crud_cvp\service\IClienteService.class
+com\gdsofi\crud_cvp\repository\IClienteRepository.class
+com\gdsofi\crud_cvp\repository\IVentaRepository.class
+com\gdsofi\crud_cvp\service\ProductoService.class
+com\gdsofi\crud_cvp\controller\ClienteController.class
+com\gdsofi\crud_cvp\controller\VentaController.class

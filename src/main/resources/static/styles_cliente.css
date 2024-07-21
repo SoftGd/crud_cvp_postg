@@ -1,0 +1,245 @@
+/* Estilos generales */
+body {
+    font-family: 'Roboto Slab', serif;
+    margin: 0;
+    padding: 0;
+    background: url('/img/fondo.jpg') no-repeat center center fixed; /* Imagen de fondo fija */
+    background-size: cover;
+    color: white; /* Color de texto blanco */
+}
+
+/* Aplicar la fuente a todos los elementos */
+* {
+    font-family: 'Roboto Slab', serif;
+}
+
+header {
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo negro transparente (RGBA) */
+    padding: 20px 0; /* Aumentar el padding para hacer el encabezado más grande */
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 30px; /* Aumentar el espaciado entre elementos */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 24px; /* Aumentar el tamaño del texto */
+    padding: 15px 25px; /* Aumentar el padding para más espacio alrededor del texto */
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Color de fondo blanco transparente al pasar el mouse */
+}
+
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: black;
+}
+
+/* Estilos de la tabla */
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+    margin-left: auto; /* Centrar la tabla en la página */
+    margin-right: auto; /* Centrar la tabla en la página */
+}
+
+table {
+    width: 100%; /* Ancho de la tabla completo */
+    border-collapse: collapse;
+    margin: 0 auto; /* Centrar la tabla en la página */
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con opacidad */
+}
+
+table thead {
+    background-color: #333;
+    color: white;
+}
+
+
+table th,
+table td {
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+    color: black; /* Cambiar el color del texto a negro */
+}
+
+table th {
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.05); /* Fondo gris claro para filas pares */
+}
+
+
+/* Ajuste de espaciado para botones y formularios en la tabla */
+table td button,
+table td form {
+    margin: 20px; /* Ajustar el margen según sea necesario */
+}
+
+/* Estilos de los botones */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin: 5px;
+    text-align: center;
+    background-color: black; /* Color de fondo por defecto */
+    border: none;
+    cursor: pointer;
+    font-family: 'Roboto Slab', serif; /* Utiliza la fuente Roboto Slab */
+}
+
+.btn:hover {
+    background-color: #007bb5; /* Cambio de color al pasar el mouse */
+}
+
+/* Estilos para modales */
+.modal {
+    display: none; /* Inicialmente ocultar los modales */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+}
+.modal-content h2 {
+    color: black; /* Color de texto blanco para el título */
+    text-align: center; /* Centrar el título */
+    margin-bottom: 20px; /* Espacio inferior del título */
+}
+
+
+
+.modal-content {
+    background: url('/img/fondo.jpg') no-repeat center center fixed; /* Aplica el mismo fondo que en el body */
+    background-size: cover;
+    background-color: #fefefe; /* Color de fondo del contenido del modal */
+    margin: 5% auto; /* Ajusta el margen para centrar el modal */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; /* Ajusta el ancho del modal */
+    max-width: 600px; /* Ancho máximo del modal */
+    border-radius: 5px;
+    position: relative;
+    font-family: 'Roboto Slab', serif; /* Utiliza la fuente Roboto Slab */
+}
+
+.modal-content label {
+    display: block;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.modal-content input[type="text"],
+.modal-content select {
+    width: calc(100% - 20px); /* Ajusta el ancho del campo de entrada */
+    padding: 8px; /* Reducir el relleno interno */
+    margin-bottom: 10px;
+    font-family: 'Roboto Slab', serif; /* Utiliza la fuente Roboto Slab */
+    font-size: 16px; /* Reducir el tamaño de la fuente */
+}
+
+.modal-content button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: 'Roboto Slab', serif; /* Utiliza la fuente Roboto Slab */
+}
+
+.modal-content button:hover {
+    background-color: #007bb5;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* TODO PARA PRODUCTOS */
+/* Contenedor de productos */
+.products-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.available-products, .selected-products {
+    width: 45%; /* Ancho de cada sección */
+}
+
+.available-products select {
+    width: 100%;
+    height: 150px; /* Ajusta la altura según sea necesario */
+    margin-bottom: 10px;
+}
+
+.selected-products ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 150px; /* Ajusta la altura según sea necesario */
+    overflow-y: auto;
+    border: 1px solid #ddd; /* Agrega un borde */
+    padding: 10px;
+}
+
+.selected-products ul li {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con opacidad */
+    margin-bottom: 5px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selected-products ul li button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.selected-products ul li button:hover {
+    background-color: darkred;
+}
+
+

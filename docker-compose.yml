@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app_crud:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://dpg-cqe64lo8fa8c73e0thv0-a.oregon-postgres.render.com:5432/crude_cvp
+      DB_USERNAME: admin
+      DB_PASSWORD: s34IgMucfVZZRs4ALHacl5SKTSrawS75
+    restart: always
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+

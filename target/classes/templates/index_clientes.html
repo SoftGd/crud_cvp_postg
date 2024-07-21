@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${'CrudClientesVentasProductos'}">CrudClientesVentasProductos</title>
+    <link rel="preload" href="/img/fondo.jpg" as="image" th:href="@{/img/fondo.jpg}" /> <!-- Preload the background image -->
+    <link rel="stylesheet" href="/styles_cliente.css" th:href="@{/styles_cliente.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+    <script th:src="@{/app_cliente.js}"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/clientes">Clientes</a></li>
+                <li><a href="/productos">Productos</a></li>
+                <li><a href="/ventas">Ventas</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>LISTA DE CLIENTES</h1>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Telefono</th>
+                        <th>DNI</th>
+                        <th>Acciones</th>
+                        <th>
+                            <div class="search-container">
+                                <label for="searchInput">Buscar Cliente:</label>
+                                <input type="text" id="searchInput" oninput="buscarClientes()" placeholder="Ingrese nombre o ID">
+                                <button type="button" onclick="buscarClientes()">Buscar</button>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterar sobre la lista de clientes y mostrar cada cliente -->
+                    <tr th:each="cliente : ${clientes}">
+                        <td th:text="${cliente.idCliente}">ID</td>
+                        <td th:text="${cliente.nombre}">Nombre</td>
+                        <td th:text="${cliente.apellido}">Apellido</td>
+                        <td th:text="${cliente.telefono}">Telefono</td>
+                        <td th:text="${cliente.dni}">DNI</td>
+                        <td>
+                            <!-- Botones de editar y eliminar -->
+                            <button class="btn" th:attr="onclick='openEditModal(\'' + ${cliente.idCliente} + '\', \'' + ${cliente.nombre} +
+                                    '\', \'' + ${cliente.apellido} + '\', \'' + (${cliente.telefono} != null ? ${cliente.telefono} : '') + '\', \'' 
+                                    + (${cliente.dni} != null ? ${cliente.dni} : '') + '\')'">Editar</button>
+                            <form th:action="@{/clientes/eliminar/{id}(id=${cliente.idCliente})}" method="post" style="display:inline;">
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <button type="submit" class="btn" onclick="return confirm('¿Estás seguro de eliminar este cliente?')">Eliminar</button>
+                            </form>
+                            <!-- botón Ver Compras -->
+                            <button th:onclick="'openVerComprasModal(' + ${cliente.idCliente} + ')'" class="btn">Ver Compras</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Botón para agregar nuevo cliente -->
+        <button class="btn" onclick="openAddModal()">AGREGAR CLIENTE</button>
+        
+        <!-- Modal para agregar cliente -->
+        <div id="addModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form th:action="@{/clientes/crear}" method="post">
+                    <label for="addNombre">Nombre:</label>
+                    <input type="text" id="addNombre" name="nombre">
+                    <label for="addApellido">Apellido:</label>
+                    <input type="text" id="addApellido" name="apellido">
+                    <label for="addTelefono">Telefono:</label> 
+                    <input type="text" id="addTelefono" name="telefono"> 
+                    <label for="addDNI">DNI:</label>
+                    <input type="text" id="addDNI" name="dni">
+                    <button type="submit" class="btn">AGREGAR CLIENTE</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal para editar cliente -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Editar Cliente</h2>
+                <form id="editForm" th:action="@{/clientes/editar}" method="post">
+                    <input type="hidden" id="editId" name="idCliente">
+                    <label for="editNombre">Nombre:</label>
+                    <input type="text" id="editNombre" name="nombre">
+                    <label for="editApellido">Apellido:</label>
+                    <input type="text" id="editApellido" name="apellido">
+                    <label for="editTelefono">Telefono:</label> 
+                    <input type="text" id="editTelefono" name="telefono"> 
+                    <label for="editDNI">DNI:</label>
+                    <input type="text" id="editDNI" name="dni">
+                    <button type="submit" class="btn">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>   
+    <!-- Modal para ver compras -->
+<div id="verComprasModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeVerComprasModal()">&times;</span>
+        <h2>Ventas Relacionadas</h2>
+        <div id="ventasContainer"></div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código Venta</th>
+                    <th>Fecha Venta</th>
+                    <th>Total Venta</th>
+                    <th>Productos</th>
+                </tr>
+            </thead>
+            <tbody id="ventasTableBody"></tbody>
+        </table>
+    </div>
+</div>
+</main>
+    <script src="app_cliente.js"></script>
+</body>
+</html>

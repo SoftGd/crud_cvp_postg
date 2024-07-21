@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${'CrudClientesVentasProductos'}">CrudClientesVentasProductos</title>
+    <link rel="stylesheet" href="/styles_venta.css" th:href="@{/styles_venta.css}" />
+    <script th:src="@{/app_venta.js}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/clientes">Clientes</a></li>
+                <li><a href="/productos">Productos</a></li>
+                <li><a href="/ventas">Ventas</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Lista de Ventas</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Productos</th>
+                        <th>Total Venta</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="venta : ${ventas}">
+                        <td th:text="${venta.codigo_venta}">ID</td>
+                        <td th:text="${venta.fecha_venta}">Fecha</td>
+                        <td th:text="${venta.unCliente != null ? venta.unCliente.nombre + ' ' + venta.unCliente.apellido : 'Cliente no especificado'}">Cliente</td>
+                        <td>
+                            <ul>
+                                <li th:each="producto : ${venta.listaProductos}" th:text="${producto.nombre + ' - ' + producto.marca + ' - Costo: $' + producto.costo}"></li>
+                            </ul>
+                        </td>
+                        <td th:text="${venta.total_venta}">Total Venta</td>
+                        <td>
+                            <button class="btn-edit" th:onclick="openEditModal([[${venta.codigo_venta}]], [[${venta.fecha_venta}]], [[${venta.unCliente.idCliente}]], [[${venta.listaProductos}]])">Editar</button>
+                            <form th:action="@{/ventas/eliminar/{codigo_venta}(codigo_venta=${venta.codigo_venta})}" method="post" style="display:inline;">
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <button type="submit" class="btn-delete" onclick="return confirm('¿Estás seguro de eliminar esta venta?')">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="btn-add" onclick="openAddModal()">Agregar Venta</button>
+    </main>
+
+    <!-- Modal para agregar venta -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddModal()">&times;</span>
+            <form id="ventaForm" th:action="@{/ventas/crear}" method="post">
+                <label for="addFecha">Fecha:</label>
+                <input type="date" id="addFecha" name="fecha_venta" required>
+
+                <label for="addCliente">Cliente:</label>
+                <select id="addCliente" name="idCliente" onchange="toggleNewClienteForm()">
+                    <option value="">Seleccione un cliente</option>
+                    <option th:each="cliente : ${clientes}" th:value="${cliente.idCliente}" th:text="${cliente.nombre + ' ' + cliente.apellido}"></option>
+                    <option value="new">Agregar nuevo cliente</option>
+                </select>
+
+                <div id="newClienteForm" style="display: none;">
+                    <label for="addNombre">Nombre:</label>
+                    <input type="text" id="addNombre" name="nombre" required>
+                    <label for="addApellido">Apellido:</label>
+                    <input type="text" id="addApellido" name="apellido" required>
+                    <label for="addDNI">DNI:</label>
+                    <input type="text" id="addDNI" name="dni" required>
+                    <label for="addTelefono">Teléfono:</label>
+                    <input type="text" id="addTelefono" name="telefono">
+                    <button type="button" onclick="submitNewClienteForm()">Guardar Cliente</button>
+                </div>
+
+                <label for="addProductosDisponibles">Productos Disponibles:</label>
+                <select id="addProductosDisponibles" name="codigo_productos" multiple="multiple" size="5" data-url="/ventas/productos-disponibles">
+                    
+                </select>
+
+                <div class="button-container">
+                    <button type="button" class="btn-add-modal" onclick="agregarProducto()">Agregar Producto</button>
+                </div>
+
+                <label for="productosSeleccionados">Productos Seleccionados:</label>
+                <ul id="productosSeleccionados">
+                    
+                </ul>
+
+                <label for="totalVenta">Total Venta:</label>
+                <input type="text" id="totalVenta" name="total_venta" readonly>
+
+                <button type="button" class="btn-add-modal" onclick="submitVentaForm()">Agregar Venta</button>
+            </form>
+        </div>
+    </div>
+
+   <!-- Modal para editar venta -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditModal()">&times;</span>
+        <form id="editVentaForm" th:action="@{/ventas/editar}" method="post" data-codigo-venta="">
+            <label for="editFecha">Fecha:</label>
+            <input type="date" id="editFecha" name="fecha_venta" required>
+
+            <label for="editCliente">Cliente:</label>
+            <select id="editCliente" name="idCliente" onchange="toggleEditClienteForm()">
+                <option value="">Seleccione un cliente</option>
+                <option th:each="cliente : ${clientes}" th:value="${cliente.idCliente}" th:text="${cliente.nombre + ' ' + cliente.apellido}"></option>
+                <option value="new">Agregar nuevo cliente</option>
+            </select>
+
+            <div id="editNewClienteForm" style="display: none;">
+                <label for="editNombre">Nombre:</label>
+                <input type="text" id="editNombre" name="nombre" required>
+                <label for="editApellido">Apellido:</label>
+                <input type="text" id="editApellido" name="apellido" required>
+                <label for="editDNI">DNI:</label>
+                <input type="text" id="editDNI" name="dni" required>
+                <label for="editTelefono">Teléfono:</label>
+                <input type="text" id="editTelefono" name="telefono">
+                <button type="button" onclick="submitEditNewClienteForm()">Guardar Cliente</button>
+            </div>
+
+            <label for="editProductosDisponibles">Productos Disponibles:</label>
+            <select id="editProductosDisponibles" name="codigo_productos" multiple="multiple" size="5" data-url="/ventas/productos-disponibles">
+                
+            </select>
+
+            <div class="button-container">
+                <button type="button" class="btn-edit-modal" onclick="agregarProductoEdit()">Agregar Producto</button>
+            </div>
+
+            <label for="editProductosSeleccionados">Productos Seleccionados:</label>
+            <ul id="editProductosSeleccionados">
+                
+            </ul>
+
+            <label for="editTotalVenta">Total Venta:</label>
+            <input type="text" id="editTotalVenta" name="total_venta" readonly>
+
+            <button type="button" class="btn-edit-modal" onclick="submitEditVentaForm()">Guardar Cambios</button>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

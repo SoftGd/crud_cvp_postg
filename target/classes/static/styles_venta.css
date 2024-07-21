@@ -1,0 +1,341 @@
+/* Estilos generales */
+body {
+    font-family: 'Roboto Slab', serif;
+    margin: 0;
+    padding: 0;
+    background: url('/img/fondo.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: black;
+}
+
+* {
+    font-family: 'Roboto Slab', serif;
+}
+
+header {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+    padding: 15px 25px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+}
+
+/* Estilos de la tabla */
+.table-container {
+    overflow-x: auto;
+    margin: 20px auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+}
+
+table thead {
+    background-color: #333;
+    color: white;
+}
+
+table th,
+table td {
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+    color: black;
+}
+
+table th {
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Estilos de los botones */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin: 5px;
+    text-align: center;
+    background-color: black;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #007bb5;
+}
+
+/* Estilos específicos para botones de acción */
+.btn-edit,
+.btn-delete,
+.btn-add {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.btn-edit:hover,
+.btn-delete:hover,
+.btn-add:hover {
+    background-color: #007bb5;
+}
+
+/* Estilos para modales */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h2 {
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-content {
+    background: url('/img/fondo.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 5px;
+    position: relative;
+    color: black;
+}
+
+.modal-content label {
+    display: block;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.modal-content input[type="text"],
+.modal-content select,
+.modal-content input[type="date"] {
+    width: calc(100% - 16px);
+    padding: 8px;
+    margin-bottom: 10px;
+    font-family: 'Roboto Slab', serif;
+    font-size: 16px;
+    color: black;
+}
+
+.modal-content button[type="submit"],
+.modal-content button[type="button"] {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: 'Roboto Slab', serif;
+    margin-top: 10px;
+}
+
+.modal-content button[type="submit"]:hover,
+.modal-content button[type="button"]:hover {
+    background-color: #007bb5;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilos específicos para la sección de ventas */
+.products-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.available-products,
+.selected-products {
+    width: 45%;
+}
+
+.available-products select {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+.selected-products ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.selected-products ul li {
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 5px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+}
+
+.selected-products ul li button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.selected-products ul li button:hover {
+    background-color: #007bb5;
+}
+
+/* Estilos específicos para formularios */
+.form-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 70%;
+    margin: 20px auto;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.form-container input[type="text"],
+.form-container input[type="date"],
+.form-container select {
+    width: calc(100% - 16px);
+    padding: 8px;
+    margin-bottom: 10px;
+    font-family: 'Roboto Slab', serif;
+    font-size: 16px;
+    color: black;
+}
+
+.form-container button[type="submit"],
+.form-container button[type="button"] {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.form-container button[type="submit"]:hover,
+.form-container button[type="button"]:hover {
+    background-color: #007bb5;
+}
+
+
+
+
+
+
+/* Asegura que los productos disponibles y seleccionados se vean consistentes */
+#addProductosDisponibles,
+#productosSeleccionados {
+    width: 100%;
+    height: 150px; /* Ajusta la altura según sea necesario */
+    overflow-y: auto; /* Añade desplazamiento vertical si es necesario */
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Ajusta los estilos de los elementos dentro de los selects y listas */
+#addProductosDisponibles option,
+#productosSeleccionados li {
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 5px;
+    padding: 5px;
+    color: black;
+}
+
+/* Estilo para los botones en la lista de productos seleccionados */
+#productosSeleccionados li button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#productosSeleccionados li button:hover {
+    background-color: #007bb5;
+}

@@ -1,0 +1,16 @@
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\controller\ClienteController.java
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\controller\ProductoController.java
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\controller\VentaController.java
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\CrudCvpApplication.java
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\model\Cliente.java
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\model\Producto.java
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\model\Venta.java
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\repository\IClienteRepository.java
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\repository\IProductoRepository.java
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\repository\IVentaRepository.java
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\service\ClienteService.java
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\service\IClienteService.java
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\service\IProductoService.java
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\service\IVentaService.java
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\service\ProductoService.java
+C:\Users\Sofia\Desktop\crud_cvp_postg\src\main\java\com\gdsofi\crud_cvp\service\VentaService.java

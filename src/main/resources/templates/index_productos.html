@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${'CrudClientesVentasProductos'}">CrudClientesVentasProductos</title>
+    <link rel="preload" href="/img/fondo.jpg" as="image" th:href="@{/img/fondo.jpg}" /> <!-- Preload the background image -->
+    <link rel="stylesheet" href="/styles_cliente.css" th:href="@{/styles_cliente.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+    <script th:src="@{/app_producto.js}"></script> 
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/clientes">Clientes</a></li>
+                <li><a href="/productos">Productos</a></li>
+                <li><a href="/ventas">Ventas</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>LISTA DE PRODUCTOS</h1>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Marca</th>
+                        <th>Costo</th>
+                        <th>Cantidad</th>
+                        <th>Acciones</th>
+                        <th>
+                            <div class="search-container">
+                                <label for="searchInput">Buscar Producto:</label>
+                                <input type="text" id="searchInput" oninput="buscarProductos()" placeholder="Ingrese nombre o Código">
+                                <button type="button" onclick="buscarProductos()">Buscar</button>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterar sobre la lista de productos y mostrar cada producto -->
+                    <tr th:each="producto : ${productos}">
+                        <td th:text="${producto.codigo_producto}">Código</td>
+                        <td th:text="${producto.nombre}">Nombre</td>
+                        <td th:text="${producto.marca}">Marca</td>
+                        <td th:text="${producto.costo}">Costo</td>
+                        <td th:text="${producto.cantidad_disponibilidad}">Cantidad</td>
+                        <td>
+                            <!-- Botones de editar y eliminar -->
+                            <button class="btn" th:attr="onclick='openEditModal(\'' + ${producto.codigo_producto} + '\', \'' + ${producto.nombre} +
+                                    '\', \'' + ${producto.marca} + '\', \'' + ${producto.costo} + '\', \'' + ${producto.cantidad_disponibilidad} + '\')'">Editar</button>
+                            <form th:action="@{/productos/eliminar/{codigo_producto}(codigo_producto=${producto.codigo_producto})}" method="post" style="display:inline;">
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <button type="submit" class="btn" onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</button>
+                            </form>                         
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Botón para agregar nuevo producto -->
+        <button class="btn" onclick="openAddModal()">AGREGAR PRODUCTO</button>
+        
+        <!-- Modal para agregar producto -->
+        <div id="addModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form th:action="@{/productos/crear}" method="post">
+                    <label for="addNombre">Nombre:</label>
+                    <input type="text" id="addNombre" name="nombre">
+                    <label for="addMarca">Marca:</label>
+                    <input type="text" id="addMarca" name="marca">
+                    <label for="addCosto">Costo:</label>
+                    <input type="number" id="addCosto" name="costo">
+                    <label for="addCantidad">Cantidad:</label>
+                    <input type="number" id="addCantidad" name="cantidad_disponibilidad"><br>
+                    <button type="submit" class="btn">AGREGAR PRODUCTO</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal para editar producto -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Editar Producto</h2>
+                <form id="editForm" th:action="@{/productos/editar}" method="post">
+                    <input type="hidden" id="editCodigo" name="codigo_producto">
+                    <label for="editNombre">Nombre:</label>
+                    <input type="text" id="editNombre" name="nombre">
+                    <label for="editMarca">Marca:</label>
+                    <input type="text" id="editMarca" name="marca">
+                    <label for="editCosto">Costo:</label>
+                    <input type="number" id="editCosto" name="costo">
+                    <label for="editCantidad">Cantidad:</label>
+                    <input type="number" id="editCantidad" name="cantidad_disponibilidad"><br>
+                    <button type="submit" class="btn">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+    <script src="app_producto.js"></script> 
+</body>
+</html>
